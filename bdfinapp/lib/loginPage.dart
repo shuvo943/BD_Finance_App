@@ -143,7 +143,7 @@ class _LogInPageState extends State<LogInPage> {
                             hintStyle:
                                 TextStyle(color: Colors.grey, fontSize: 35),
                             contentPadding:
-                                EdgeInsets.only(left: 20, bottom: 15),
+                                EdgeInsets.only(left: 20, bottom: 15, top: 15),
                           ),
                         ),
                       )
@@ -156,7 +156,6 @@ class _LogInPageState extends State<LogInPage> {
                 RaisedButton(
                   padding: EdgeInsets.symmetric(horizontal: 0),
                   onPressed: () {
-                    
                     if (_formKey.currentState.validate()) {
                       dbRef.push().set({
                         "name": contro.text,
