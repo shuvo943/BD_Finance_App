@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1005973390762",
+    "firebase_url": "https://bdfinance-7e04f.firebaseio.com",
+    "project_id": "bdfinance-7e04f",
+    "storage_bucket": "bdfinance-7e04f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005973390762:android:cd49c4fb23cca1c0b717d3",
+        "android_client_info": {
+          "package_name": "com.example.bdfinapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005973390762-4t9l70bl1lk3ajqi8so3jjnmg0pemo5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bdfinapp",
+            "certificate_hash": "27a1bf9d96c2fddc88726d096632c0ae0f629bc8"
+          }
+        },
+        {
+          "client_id": "1005973390762-t6qtdbqrvio2khvn0j8d86mjpiqr85sf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc0mbdMg_vcibC50jgWGljkkhfrV23n8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005973390762-t6qtdbqrvio2khvn0j8d86mjpiqr85sf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
