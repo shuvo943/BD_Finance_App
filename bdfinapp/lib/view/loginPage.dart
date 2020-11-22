@@ -1,6 +1,9 @@
 import 'dart:ui';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:bdfinapp/core/models/productModel.dart';
+import 'package:bdfinapp/core/viewmodels/CRUDModel.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -12,7 +15,7 @@ class _LogInPageState extends State<LogInPage> {
   TextEditingController c2 = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  final dbRef = FirebaseDatabase.instance.reference().child("petto");
+  // final dbRef = FirebaseDatabase.instance.reference().child("petto");
   @override
   void dispose() {
     super.dispose();
@@ -22,6 +25,7 @@ class _LogInPageState extends State<LogInPage> {
 
   @override
   Widget build(BuildContext context) {
+    var productProvider = Provider.of<CRUDModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       resizeToAvoidBottomPadding: false,
@@ -93,9 +97,11 @@ class _LogInPageState extends State<LogInPage> {
                           border: Border.all(),
                         ),
                         child: TextFormField(
+                          keyboardType: TextInputType.emailAddress,
                           controller: contro,
                           decoration: InputDecoration(
                             hintText: 'eg-yourname@bdfinance.net',
+                            border: InputBorder.none,
                             hintStyle:
                                 TextStyle(color: Colors.grey, fontSize: 13),
                             contentPadding:
@@ -143,7 +149,7 @@ class _LogInPageState extends State<LogInPage> {
                             hintStyle:
                                 TextStyle(color: Colors.grey, fontSize: 35),
                             contentPadding:
-                                EdgeInsets.only(left: 20, bottom: 15, top: 15),
+                                EdgeInsets.only(left: 20, bottom: 15, top: 25),
                           ),
                         ),
                       )
@@ -155,22 +161,27 @@ class _LogInPageState extends State<LogInPage> {
                 ),
                 RaisedButton(
                   padding: EdgeInsets.symmetric(horizontal: 0),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState.validate()) {
-                      dbRef.push().set({
-                        "name": contro.text,
-                        "age": c2.text,
-                      }).then((_) {
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Successfully Added')));
-                        contro.clear();
-                        c2.clear();
-                      }).catchError((onError) {
-                        Scaffold.of(context)
-                            .showSnackBar(SnackBar(content: Text(onError)));
-                      });
+                      _formKey.currentState.save();
+                      // dbRef.push().set({
+                      //   "name": contro.text,
+                      //   "age": c2.text,
+                      // }).then((_) {
+                      //   Scaffold.of(context).showSnackBar(
+                      //       SnackBar(content: Text('Successfully Added')));
+                      //   contro.clear();
+                      //   c2.clear();
+                      // }).catchError((onError) {
+                      //   Scaffold.of(context)
+                      //       .showSnackBar(SnackBar(content: Text(onError)));
+                      // });  w8.....
+
+                      await productProvider.addProduct(
+                          Product(email: contro.text, password: c2.text));
+                      // Navigator.pop(context) ;
+                      Navigator.pushNamed(context, '/allfeaturespage');
                     }
-                    Navigator.pushNamed(context, '/allfeaturespage');
                   },
                   child: Container(
                     decoration: BoxDecoration(

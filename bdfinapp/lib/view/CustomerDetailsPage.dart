@@ -3,6 +3,10 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import 'core/models/productModel.dart';
+import 'core/viewmodels/CRUDModel.dart';
 
 class CustomerDetailPage extends StatefulWidget {
   @override
@@ -10,7 +14,7 @@ class CustomerDetailPage extends StatefulWidget {
 }
 
 class _CustomerDetailPageState extends State<CustomerDetailPage> {
-    final dbRef = FirebaseDatabase.instance.reference().child("clientInfo");
+  final dbRef = FirebaseDatabase.instance.reference().child("clientInfo");
   @override
   void dispose() {
     super.dispose();
@@ -18,14 +22,13 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
     contro1.dispose();
     contro2.dispose();
     contro3.dispose();
-    
-
   }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController contro = TextEditingController();
-   TextEditingController contro1 = TextEditingController();
-    TextEditingController contro2 = TextEditingController();
-    TextEditingController contro3 = TextEditingController();
+  TextEditingController contro1 = TextEditingController();
+  TextEditingController contro2 = TextEditingController();
+  TextEditingController contro3 = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
   bool isChecked = false;
@@ -55,6 +58,7 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var productProvider = Provider.of<CRUDModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Customer Detail"),
@@ -227,7 +231,8 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                           ),
                           child: DropdownButtonFormField(
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(bottom: 15,left:30),
+                                contentPadding:
+                                    EdgeInsets.only(bottom: 15, left: 30),
                               ),
                               items: pro_name.map((String proitemsind) {
                                 return DropdownMenuItem(
@@ -277,7 +282,7 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                             ),
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Enter a valid email';
+                                return 'Enter a valid figure';
                               }
                               return null;
                             },
@@ -356,32 +361,44 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                       ],
                     ),
                   ),
-                 SizedBox(
-                   width: 300,
-                   child:RaisedButton(onPressed: (){
-                      if (_formKey.currentState.validate()) {
-                      dbRef.push().set({
-                        "name": contro.text,
-                        "mobile_no": contro1.text,
-                        "Address" : contro2.text,
-                        "Amount" : contro3.text,
-                      }).then((_) {
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Successfully Added',style:TextStyle(fontSize: 25,color:Colors.red[200])),));
-                        contro.clear();
-                        contro1.clear();
-                        contro2.clear();
-                        contro3.clear();
-                      }).catchError((onError) {
-                        Scaffold.of(context)
-                            .showSnackBar(SnackBar(content: Text(onError)));
-                      });
-                    }
-                   },
-                   color: Colors.grey[400],
-                   child: Text('Create Visit',style: TextStyle(fontWeight: FontWeight.bold),),) ,
-                 ),   
-
+                  SizedBox(
+                    width: 300,
+                    child: RaisedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          await productProvider.addProduct(Product(
+                            name: contro.text,
+                            phone: contro1.text,
+                            address: contro2.text,
+                          ));
+                          Navigator.pushNamed(context, '/allfeaturespage');
+                          // dbRef.push().set({
+                          //   "name": contro.text,
+                          //   "mobile_no": contro1.text,
+                          //   "Address" : contro2.text,
+                          //   "Amount" : contro3.text,
+                          // }).then((_) {
+                          //   Scaffold.of(context).showSnackBar(
+                          //       SnackBar(content: Text('Successfully Added',style:TextStyle(fontSize: 25,color:Colors.red[200])),));
+                          //   contro.clear();
+                          //   contro1.clear();
+                          //   contro2.clear();
+                          //   contro3.clear();
+                          // }).catchError((onError) {
+                          //   Scaffold.of(context)
+                          //       .showSnackBar(SnackBar(content: Text(onError)));
+                          // });
+                        
+                        }
+                      },
+                      color: Colors.grey[400],
+                      child: Text(
+                        'Create Visit',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

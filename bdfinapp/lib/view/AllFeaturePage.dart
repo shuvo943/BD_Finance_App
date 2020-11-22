@@ -1,8 +1,6 @@
 import 'dart:ui';
 
-import 'package:bdfinapp/ClientAppointment.dart';
-import 'package:bdfinapp/CustomerDetailsPage.dart';
-import 'package:bdfinapp/Product.dart';
+
 import 'package:flutter/material.dart';
 
 class AllFeaturesPage extends StatefulWidget {
@@ -11,19 +9,19 @@ class AllFeaturesPage extends StatefulWidget {
 }
 
 class _AllFeaturesPageState extends State<AllFeaturesPage> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    AllFeaturesPage(),
-    ProductsPage(),
-    CustomerDetailPage(),
-    ClientAppointPage(),
-  ];
+  // int _currentIndex = 0;
+  // final List<Widget> _children = [
+  //   AllFeaturesPage(),
+  //   ProductsPage(),
+  //   CustomerDetailPage(),
+  //   ClientAppointPage(),
+  // ];
 
-  void OnTappedOnNB(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
+  // void OnTappedOnNB(int index) {
+  //   setState(() {
+  //     _currentIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -233,8 +231,8 @@ class _AllFeaturesPageState extends State<AllFeaturesPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: OnTappedOnNB,
-        currentIndex: _currentIndex,
+        
+        
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
