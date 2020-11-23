@@ -4,13 +4,13 @@ import 'dart:async';
 class Api {
   // ignore: deprecated_member_use
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  final String path = 'info';
+  final String path;
   CollectionReference ref;
   DocumentReference df;
 
-  Api(path) {
+  Api(this.path) {
     ref = _db.collection(path);
-    df = _db.collection("dd").doc("pp");
+    df = _db.collection("dd").doc();
   }
 
   Future<QuerySnapshot> getDataCollection() {

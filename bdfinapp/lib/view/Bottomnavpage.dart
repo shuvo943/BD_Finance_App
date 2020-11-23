@@ -1,7 +1,7 @@
-import 'package:bdfinapp/AllFeaturePage.dart';
-import 'package:bdfinapp/ClientAppointment.dart';
-import 'package:bdfinapp/CustomerDetailsPage.dart';
-import 'package:bdfinapp/Product.dart';
+import 'package:bdfinapp/view/AllFeaturePage.dart';
+import 'package:bdfinapp/view/ClientAppointment.dart';
+import 'package:bdfinapp/view/CustomerDetailsPage.dart';
+import 'package:bdfinapp/view/Product.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {

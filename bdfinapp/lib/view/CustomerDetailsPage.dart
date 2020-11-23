@@ -1,12 +1,11 @@
 import 'dart:ui';
+import 'package:bdfinapp/core/models/productModel.dart';
+import 'package:bdfinapp/core/viewmodels/CRUDModel.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import 'core/models/productModel.dart';
-import 'core/viewmodels/CRUDModel.dart';
 
 class CustomerDetailPage extends StatefulWidget {
   @override
@@ -371,6 +370,8 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                             name: contro.text,
                             phone: contro1.text,
                             address: contro2.text,
+                            birthdate: _dateController.text,
+                            profession: _currentItem,
                           ));
                           Navigator.pushNamed(context, '/allfeaturespage');
                           // dbRef.push().set({
@@ -389,7 +390,7 @@ class _CustomerDetailPageState extends State<CustomerDetailPage> {
                           //   Scaffold.of(context)
                           //       .showSnackBar(SnackBar(content: Text(onError)));
                           // });
-                        
+
                         }
                       },
                       color: Colors.grey[400],
